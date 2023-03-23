@@ -1,0 +1,5 @@
+Jakub Sumera 3bte
+--login: admin password: admin
+--login: dostawca password: dostawca
+
+można zamówić pizze które są soft usunięte : błąd

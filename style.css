@@ -17,9 +17,7 @@ body {
   height: 100%;
   font-size: larger;
   background-color: rgb(39, 41, 43);
-  ;
   color: white;
-
 }
 
 #subpage {
@@ -39,6 +37,12 @@ button,
   width: 10vw;
   height: 4vh;
 }
+
+.exception {
+  width: 3vw;
+  height: 3vh;
+}
+
 
 .button:hover,
 button:hover {
@@ -60,7 +64,8 @@ button:hover {
   border: 2px solid black;
 }
 
-#button3:hover {
+#button3:hover,
+#button6:hover {
   background-color: red;
   color: black;
   border: 2px solid black;

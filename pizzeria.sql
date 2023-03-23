@@ -13,12 +13,13 @@ CREATE TABLE pizza (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nazwa VARCHAR(50),
     skladniki VARCHAR(200),
-    cena INT 
+    cena INT ,
+    deleted TINYINT
 );
-INSERT INTO pizza(nazwa,skladniki,cena) VALUES ("Margherita","ciasto, sos pomidorowy, ser, oregano",30);
-INSERT INTO pizza(nazwa,skladniki,cena) VALUES ("Capriciosa","ciasto, sos pomidorowy, ser, szynka, pieczarki, oregano",44);
-INSERT INTO pizza(nazwa,skladniki,cena) VALUES ("Pepperoni","ciasto, sos pomidorowy, ser, salami pepperoni, oregano",42);
-INSERT INTO pizza(nazwa,skladniki,cena) VALUES ("Cztery Sery","ciasto, sos pomidorowy, ser, ser mozzarella, ser sałatkowy, ser pleśniowy, oreganon",58);
+INSERT INTO pizza(nazwa,skladniki,cena,deleted) VALUES ("Margherita","ciasto, sos pomidorowy, ser, oregano",30,0);
+INSERT INTO pizza(nazwa,skladniki,cena,deleted) VALUES ("Capriciosa","ciasto, sos pomidorowy, ser, szynka, pieczarki, oregano",44,0);
+INSERT INTO pizza(nazwa,skladniki,cena,deleted) VALUES ("Pepperoni","ciasto, sos pomidorowy, ser, salami pepperoni, oregano",42,0);
+INSERT INTO pizza(nazwa,skladniki,cena,deleted) VALUES ("Cztery Sery","ciasto, sos pomidorowy, ser, ser mozzarella, ser sałatkowy, ser pleśniowy, oreganon",58,0);
 
 
 CREATE TABLE pizza_order (
@@ -34,8 +35,6 @@ CREATE TABLE pizza_order (
 ALTER TABLE pizza_order ADD COLUMN user_id INT;
 ALTER TABLE pizza_order ADD COLUMN pizza_id INT;
 
+
 ALTER TABLE pizza_order ADD FOREIGN KEY (user_id) REFERENCES user(id);
 ALTER TABLE pizza_order ADD FOREIGN KEY (pizza_id) REFERENCES pizza(id);
-
---login: admin password: admin
---login: dostawca password: dostawca
