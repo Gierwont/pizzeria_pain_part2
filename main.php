@@ -25,7 +25,7 @@ session_start();
         echo "Witaj , " . $current_login;
 
 
-        if ($current_role == 'admin') {   //wyswietlanie tabeli dla admina(opcja usuwnia)
+        if ($current_role == 'admin') { //wyswietlanie tabeli dla admina(opcja usuwnia)
             $result = mysqli_query($conn, "SELECT * FROM pizza WHERE deleted =0");
             echo '<table><tr><th>Numer</th><th>Nazwa</th><th>Skladniki</th><th>Cena</th><th>Usuń</th></tr>';
             while ($row = mysqli_fetch_array($result)) {
@@ -54,9 +54,9 @@ session_start();
             header("Refresh:0");
             $id = $_POST['delete_pizza'];
             $sql = "UPDATE pizza SET deleted=1 WHERE id='$id'";
-            mysqli_query($conn, $sql);  
+            mysqli_query($conn, $sql);
         }
-        
+
 
         if ($current_role == "default") {
             echo "<br><br>
@@ -72,13 +72,26 @@ session_start();
                 $city = $_POST['city'];
                 $street = $_POST['street'];
                 $current_time = date('Y-m-d H:i:s');
-                $sql = "INSERT INTO pizza_order (numer,city,street,ordered_by,order_date,is_sent,user_id,pizza_id) VALUES ('$numer','$city','$street','$current_id','$current_time','W oczekiwaniu','$current_id','$numer')";
 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<h1>Złożono zamówienie</h1>";
+
+                $result = mysqli_query($conn, "SELECT deleted FROM pizza WHERE id=$numer");  //czy pizza którą probojemy zamówić nie jest usunięta
+                while ($row = mysqli_fetch_row($result)) {
+                
+                    $current_ordered_pizza = $row[0];
+
                 }
-                else{
-                    echo"<h2>podano zły numer zamówienia</h2>"; 
+
+                if ($current_ordered_pizza == 0) {
+                    $sql = "INSERT INTO pizza_order (numer,city,street,ordered_by,order_date,is_sent,user_id,pizza_id) VALUES ('$numer','$city','$street','$current_id','$current_time','W oczekiwaniu','$current_id','$numer')";
+
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<h1>Złożono zamówienie</h1>";
+                    } else {
+                        echo "<h2>podano zły numer zamówienia</h2>";
+                    }
+                }
+                else {
+                    echo "<h2>podano zły numer zamówienia</h2>";
                 }
             }
         }
@@ -234,8 +247,8 @@ session_start();
 
         <?php
         if ($current_role == 'admin') {
-            if (isset($_POST['add_new_pizza'])) {   //DODAWANIE NOWEJ PIZZY
-
+            if (isset($_POST['add_new_pizza'])) { //DODAWANIE NOWEJ PIZZY
+        
                 $nazwa = $_POST['nazwa'];
                 $skladniki = $_POST['skladniki'];
                 $cena = $_POST['cena'];
