@@ -22,7 +22,7 @@ session_start();
         $current_id = $_SESSION["id"];
         $current_role = $_SESSION['role'];
 
-        echo "Witaj , " . $current_login;
+        echo "Witaj , " . $current_role;
 
 
         if ($current_role == 'admin') { //wyswietlanie tabeli dla admina(opcja usuwnia)
@@ -236,17 +236,24 @@ session_start();
 
 
 
-        <br><br><br>
-        <h1>Dodawanie nowej pizzy</h1>
+        
+        <!-- <h1>Dodawanie nowej pizzy</h1>
         <form action="main.php" method="POST">
             Podaj nazwę: <input type="text" name="nazwa"><br>
             Podaj składniki: <input type="text" name="skladniki"><br>
             Podaj cenę: <input type="number" name="cena"><br>
             <input id="button6" class="button" type="submit" name="add_new_pizza" value="Dodaj nową pizzę"><br>
-        </form><br>
+        </form><br> -->
 
         <?php
         if ($current_role == 'admin') {
+            echo '<br><br><br><h1>Dodawanie nowej pizzy</h1>
+            <form action="main.php" method="POST">
+                Podaj nazwę: <input type="text" name="nazwa"><br>
+                Podaj składniki: <input type="text" name="skladniki"><br>
+                Podaj cenę: <input type="number" name="cena"><br>
+                <input id="button6" class="button" type="submit" name="add_new_pizza" value="Dodaj nową pizzę"><br>
+            </form><br>';
             if (isset($_POST['add_new_pizza'])) { //DODAWANIE NOWEJ PIZZY
         
                 $nazwa = $_POST['nazwa'];
